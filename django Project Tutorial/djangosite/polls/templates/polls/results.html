@@ -1,0 +1,14 @@
+{% include 'polls/layout.html' %}
+
+{% block body %}
+<div class="opacity-75 bg-white m-2 p-3 border border-dark rounded">
+<h1>{{ question.question.text }}</h1>
+<ul>
+  {% for choice in question.choice_set.all %}
+  <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
+  {% endfor %}
+</ul>
+</div>
+<a href="{% url 'polls:detail' question.id %}" class = "m-3 btn btn-primary">Vote Again?</a>
+
+{% endblock %}

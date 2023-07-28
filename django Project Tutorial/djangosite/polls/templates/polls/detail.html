@@ -1,0 +1,19 @@
+{% include 'polls/layout.html' %}
+{% block body %}
+<form action="{% url 'polls:vote' question.id %}" method="post">
+  {% csrf_token %}
+  <fieldset class="opacity-75 bg-white m-2 p-3 border border-dark rounded">
+    <legend><h1>{{ question.question_text }}</h1></legend>
+    {% if error_message %} <p><strong>{{ error_message }}</strong></p>
+    {% endif %}
+
+    
+    <select name="choice" id="choice">
+      {% for choice in question.choice_set.all %} 
+      <option id = "choice{{ forloop.counter}}" value = "{{choice.id}}">{{ choice.choice_text }}</option>
+      {% endfor %}
+    </select>
+
+  </fieldset>
+  <input type="submit" value="Vote" class = "m-3 btn btn-primary">
+</form>{% endblock %}
